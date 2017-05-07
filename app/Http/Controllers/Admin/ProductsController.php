@@ -42,9 +42,11 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FormBuilder $builder)
     {
-        //
+        $form = $builder->create(ProductForm::class);
+        Product::create($form->getFieldValues());
+        return redirect()->route('admin.products.index');
     }
 
     /**
